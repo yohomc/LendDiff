@@ -312,7 +312,7 @@
                         <li><a href="#faq">常见问题</a></li>
                         <li><a href="#contact">联系我们</a></li>
                         <li><a href="#privacy">隐私政策</a></li>
-
+                        <li><a href="#download">下载应用</a></li>
                     </ul>
                 </aside>
 
@@ -388,6 +388,18 @@
                         
                         <p>最后更新日期：2025年3月16日</p>
                     </section>
+
+                    <section id="download" class="download content-section">
+                        <h2>下载应用</h2>
+                        <p>您可以通过以下方式下载应用：</p>
+                       <p>
+                        <a href="https://apps.apple.com/us/app/%E8%B4%B7%E6%AC%BE%E5%AF%B9%E6%AF%94%E5%8A%A9%E6%89%8B/id6743364362" target="_blank">
+                            <img src="https://yohomc.github.io/LendDiff/App_Store_Badge.svg" alt="下载应用" style="width: 150px;">
+                        </a>
+                       </p>
+              
+                      
+                    </section>
                 </div>
             </div>
         </div>
@@ -418,7 +430,7 @@
                 
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop + 500,
                         behavior: 'smooth'
                     });
                 }
@@ -428,7 +440,7 @@
         // 滚动时更新活动链接
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('section[id]');
-            const scrollPosition = window.scrollY + 100;
+            const scrollPosition = window.scrollY - 200;
             
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
