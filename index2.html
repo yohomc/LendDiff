@@ -14,6 +14,8 @@
             --dark-gray: #515154;
             --border-color: #d2d2d7;
             --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --gradient-start: #FFB900;
+            --gradient-end: #FF5722;
         }
 
         * {
@@ -88,32 +90,42 @@
             font-size: 17px;
         }
 
-        /* 全局导航栏 */
-        .global-nav {
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: saturate(180%) blur(20px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .global-nav nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 44px;
-        }
-
-        .logo a {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--secondary-color);
-        }
-
         /* 主要内容 */
         main {
             padding: 40px 0;
+        }
+
+        /* 应用图标 */
+        .app-icon-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            margin-right: 24px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .app-icon img {
+            width: 70%;
+            height: auto;
+        }
+
+        .app-title {
+            flex: 1;
+        }
+
+        .app-title h1 {
+            margin-bottom: 10px;
         }
 
         /* 内容包装器 - 添加网格布局支持侧边导航 */
@@ -121,11 +133,18 @@
             display: grid;
             grid-template-columns: 220px 1fr;
             gap: 40px;
+            position: relative; /* 为固定定位的侧边栏提供参考 */
         }
 
-        /* 侧边导航 */
+        /* 侧边导航 - 修改为固定位置 */
         .sidebar {
+            position: sticky;
+            top: 20px; /* 顶部间距，由于移除了导航栏，减小了这个值 */
+            height: calc(100vh - 20px); /* 视口高度减去顶部偏移 */
+            overflow-y: auto; /* 内容过多时允许滚动 */
             padding-right: 20px;
+            padding-bottom: 20px;
+            transition: top 0.3s ease; /* 平滑过渡效果 */
         }
 
         .sidebar h3 {
@@ -243,8 +262,11 @@
             }
             
             .sidebar {
+                position: static; /* 在小屏幕上取消固定定位 */
+                height: auto;
                 padding-right: 0;
                 margin-bottom: 30px;
+                overflow-y: visible;
             }
             
             .sidebar ul {
@@ -273,6 +295,17 @@
             .container {
                 padding: 0 15px;
             }
+            
+            .app-icon-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .app-icon {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -283,25 +316,27 @@
             h2 {
                 font-size: 24px;
             }
+            
+            .app-icon {
+                width: 100px;
+                height: 100px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 全局导航栏 -->
-    <header class="global-nav">
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <a href="#">贷款对比助手</a>
-                </div>
-            </nav>
-        </div>
-    </header>
-
     <main>
         <div class="container">
-            <h1>贷款对比助手</h1>
-            <p class="intro">简单易用的贷款计算与对比工具，帮助您做出明智的财务决策。</p>
+            <!-- 应用图标和标题 -->
+            <div class="app-icon-container">
+                <div class="app-icon">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAzYTEgMSAwIDAgMCAwLTIgMSAxIDAgMCAwIDAgMnptMCAwdjJNMTIgM2ExIDEgMCAwIDEgMSAxdjJNMTIgM2ExIDEgMCAwIDAtMSAxdjIiLz48cGF0aCBkPSJNMTIgNnYxMk0xMiA2YTggOCAwIDEgMCAwIDE2IDggOCAwIDAgMCAwLTE2eiIvPjxwYXRoIGQ9Ik0xMiA2YTQgNCAwIDAgMC00IDR2OE0xMiA2YTQgNCAwIDAgMSA0IDR2OCIvPjxwYXRoIGQ9Ik00IDE0aDRNMTYgMTRoNCIvPjwvc3ZnPg==" alt="贷款对比助手图标">
+                </div>
+                <div class="app-title">
+                    <h1>贷款对比助手</h1>
+                    <p class="intro">简单易用的贷款计算与对比工具，帮助您做出明智的财务决策。</p>
+                </div>
+            </div>
 
             <div class="content-wrapper">
                 <!-- 侧边导航 -->
